@@ -1,15 +1,15 @@
 import { Router } from 'express'
 import { AlbumController } from './album.controller'
 
-export const songRouter = Router()
+export const AlbumRouter = Router()
 
-songRouter.param('id', AlbumController.findByParam)
+AlbumRouter.param('id', AlbumController.findByParam)
 
-songRouter.route('/')
+AlbumRouter.route('/')
     .get(AlbumController.getAll)
     .post(AlbumController.createOne)
 
-songRouter.route('/:id')
+AlbumRouter.route('/:id')
     .get(AlbumController.getOne)
     .put(AlbumController.updateOne)
     .delete(AlbumController.deleteOne)

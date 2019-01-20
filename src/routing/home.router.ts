@@ -6,4 +6,4 @@ router.get('/', (req, res) => {
     res.send('REST server is working.')
 });
 
-export const HomeController = router;
+export const HomeRouter = router;

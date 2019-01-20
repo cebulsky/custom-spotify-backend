@@ -1,7 +1,7 @@
 import * as express from 'express'
-import { HomeController } from './controllers/home.controller';
-import { AlbumController } from './controllers/album.controller';
 import * as bodyParser from 'body-parser'
+import { ApiRouter } from './routing/api.router';
+import { HomeRouter } from './routing/home.router';
 
 export class RestServer {
 
@@ -23,7 +23,7 @@ export class RestServer {
         this.app.use(bodyParser.json())
     }
     private mountRoutes(): any {
-        this.app.use('/', HomeController)
-        this.app.use('/album', AlbumController)
+        this.app.use('/', HomeRouter)
+        this.app.use('/api', ApiRouter)
     }
 }
