@@ -3,28 +3,28 @@ import { Model, Document } from 'mongoose'
 
 export const controllers = {
     createOne(model: Model<Document>, body) {
-        return model.create(body)
+        return model.create(body);
     },
 
     updateOne(docToUpdate: Document, update) {
-        merge(docToUpdate, update)
-        return docToUpdate.save()
+        merge(docToUpdate, update);
+        return docToUpdate.save();
     },
 
     deleteOne(docToDelete: Document) {
-        return docToDelete.remove()
+        return docToDelete.remove();
     },
 
     getOne(docToGet: Document) {
-        return Promise.resolve(docToGet)
+        return Promise.resolve(docToGet);
     },
 
     getAll(model: Model<Document>) {
-        return model.find({})
+        return model.find({});
     },
 
     findByParam(model: Model<Document>, id) {
-        return model.findById(id)
+        return model.findById(id);
     }
 }
 
@@ -35,8 +35,8 @@ export const createOne = (model: Model<Document>) => (req, res, next) => {
 }
 
 export const updateOne = (model: Model<Document>) => async (req, res, next) => {
-    const docToUpdate = req.docFromId
-    const update = req.body
+    const docToUpdate = req.docFromId;
+    const update = req.body;
 
     return controllers.updateOne(docToUpdate, update)
         .then(doc => res.status(201).json(doc))
@@ -65,14 +65,14 @@ export const findByParam = (model: Model<Document>) => (req, res, next, id) => {
     return controllers.findByParam(model, id)
         .then(doc => {
             if (!doc) {
-                next(new Error('Not Found Error'))
+                next(new Error('Not Found Error'));
             } else {
-                req.docFromId
-                next()
+                req.docFromId = doc.id;
+                next();
             }
         })
         .catch(error => {
-            next(error)
+            next(error);
         })
 }
 
