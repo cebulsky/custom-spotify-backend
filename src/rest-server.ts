@@ -2,6 +2,7 @@ import * as express from 'express'
 import * as bodyParser from 'body-parser'
 import { ApiRouter } from './routing/api.router';
 import { HomeRouter } from './routing/home.router';
+import { connectToMongoDb } from './mongoDb';
 
 export class RestServer {
 
@@ -13,6 +14,9 @@ export class RestServer {
     }
 
     startRestServer(port: number) {
+
+        connectToMongoDb();
+
         this.app.listen(port, function () {
             console.log(`REST server is working on localhost, port ${port}`)
         });
